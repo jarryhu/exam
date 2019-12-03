@@ -54,7 +54,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         if ($(".searchVal").val() != '') {
             table.reload("userListTable", {
                 url: '/userList.action',
-                
+
                 where: {
                     nickname: $(".searchVal").val()  //搜索的关键字
                 }
@@ -131,7 +131,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
             addUser(data);
         } else if (layEvent === 'usable') { //启用禁用
             var _this = $(this),
-                usableText = "是否确定禁用此用户？",
+                usableText = "是否确定禁用此用户？!!",
                 btnText = "已禁用";
             if (_this.text() == "已禁用") {
                 usableText = "是否确定启用此用户？",

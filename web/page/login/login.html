@@ -612,6 +612,14 @@
         color: red;
         font-weight: bold;
     }
+
+    #canvas {
+        float: right;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 </style>
 
 
@@ -643,7 +651,7 @@
         <div class="login_face"><img src="../../images/face.jpg" class="userAvatar"></div>
         <div class="layui-form-item input-item">
             <label for="loginName">用户名</label>
-            <input type="text" placeholder="请输入用户名"value="admin1" autocomplete="off" id="loginName" name="loginName"
+            <input type="text" placeholder="请输入用户名" value="admin1" autocomplete="off" id="loginName" name="loginName"
                    class="layui-input" lay-verify="required">
         </div>
         <div class="layui-form-item input-item">
@@ -651,10 +659,11 @@
             <input type="password" placeholder="请输入密码" value="111111" autocomplete="off" id="password" name="password"
                    class="layui-input" lay-verify="required">
         </div>
-        <div class="layui-form-item input-item" id="imgCode">
+        <div class="code">
             <label for="code">验证码</label>
-            <input type="text" placeholder="请输入验证码" autocomplete="off" id="code" class="layui-input">
-            <img src="../../images/code.jpg">
+            <input type="text" value="11111" placeholder="请输入验证码（不区分大小写）" id="code" class="input-val"
+                   style="width: 100px;height:40px">
+            <canvas id="canvas" width="100" height="43"></canvas>
         </div>
         <div class="layui-form-item">
             <button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
@@ -669,5 +678,10 @@
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript" src="/page/login/login.js"></script>
 <script type="text/javascript" src="js/cache.js"></script>
+
+<script>
+
+
+</script>
 </body>
 </html>

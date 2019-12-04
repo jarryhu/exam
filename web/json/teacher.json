@@ -1,7 +1,7 @@
 {
   "contentManagement": [
     {
-      "title": "试题管理",
+      "title": "试题管理1",
       "icon": "icon-text",
       "href": "page/news/newsList.html",
       "spread": false

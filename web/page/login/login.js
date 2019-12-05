@@ -22,9 +22,9 @@ layui.use(['form', 'layer', 'jquery'], function () {
                 console.log(d);
                 if (d) {
                     window.sessionStorage.setItem("user", d.nickname);
-
+                    window.sessionStorage.setItem("right", d.right);
                     window.location.href = "../../index.html";
-                    
+
                 } else {
                     layer.msg("用户名密码错误")
                 }

@@ -8,10 +8,24 @@ layui.use(['bodyTab', 'form', 'element', 'layer', 'jquery'], function () {
     var form = layui.form,
         element = layui.element;
     $ = layui.$;
+
+
     layer = parent.layer === undefined ? layui.layer : top.layer;
+
+    var username = window.sessionStorage.getItem("user");
+    $("#username").html(username);
+    var right = window.sessionStorage.getItem("right")
+    var url;
+    if (right == 1)
+        url = "json/teacher.json";
+    else if (right == 2)
+        url = "json/student.json";
+    else
+        url = "json/admin.json";
+
     tab = layui.bodyTab({
         openTabNum: "50",  //最大可打开窗口数量
-        url: "json/navs.json" //获取菜单json地址
+        url: url //获取菜单json地址
     });
 
     $(".userName").text(window.sessionStorage.getItem("user"));

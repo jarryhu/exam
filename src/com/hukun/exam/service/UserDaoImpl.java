@@ -44,8 +44,8 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public int updatehead(User user) {
-        return 0;
+    public int updateHead(User user) {
+        return userMapper.updateHead(user);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class UserDaoImpl implements UserDao {
         return userMapper.modifyUser(user);
     }
 
-//    @Override
+    //    @Override
 //    public User Login(User user) {
 //        return userMapper.login(user);
 //    }

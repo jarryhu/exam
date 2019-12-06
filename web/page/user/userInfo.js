@@ -12,15 +12,42 @@ layui.use(['form', 'layer', 'upload', 'laydate', "address"], function () {
         laydate = layui.laydate,
         address = layui.address;
 
+
+    ;
     //上传头像
-    upload.render({
-        elem: '.userFaceBtn',
-        url: '../../json/userface.json',
-        method: "get",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
-        done: function (res, index, upload) {
-            var num = parseInt(4 * Math.random());  //生成0-4的随机数，随机显示一个头像信息
-            $('#userFace').attr('src', res.data[num].src);
-            window.sessionStorage.setItem('userFace', res.data[num].src);
+    //普通图片上传
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        , url: '/uploadHead.action' //上传接口
+        , auto: false
+        , data: {id: $("#uid").val()}
+        , bindAction: '#uploadImg'
+
+        //选择文件后的回调
+        , choose: function (obj) {
+            obj.preview(function (index, file, result) {
+                $('#preview').attr('src', result);
+            })
+        },
+
+        done: function (res) {
+            //如果上传失败
+            if (!res) {
+                return layer.msg('上传失败');
+                $('.layui-btn-img').text("重新上传");
+            }
+            //上传成功
+            if (res) {
+                //layui 关闭当前窗口，刷新父级页面
+                //   console.log(JSON.parse(res.user));
+                window.sessionStorage.setItem("user", JSON.stringify(res));
+                console.log("sessionStorage>>>>>>" + window.sessionStorage.getItem("user"));
+                layer.close(layer.index);
+                parent.location.reload();
+
+                return layer.msg('上传成功', {time: 700});
+            }
         }
     });
 
@@ -51,12 +78,13 @@ layui.use(['form', 'layer', 'upload', 'laydate', "address"], function () {
 
     //提交个人资料
     form.on("submit(changeUser)", function (data) {
-        // var index = layer.msg('提交中，请稍候', {icon: 16, time: false, shade: 0.8});
+        var index = layer.msg('提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         //将填写的用户信息存到session以便下次调取
+
         var key, userInfoHtml = '';
         userInfoHtml = {
             'id': $("#uid").val(),
-            'nickname': $(".realName").val(),
+            'nickname': $(".nickname").val(),
             'sex': data.field.sex,
             'userPhone': $(".userPhone").val(),
             'userBirthday': $(".userBirthday").val(),
@@ -64,6 +92,7 @@ layui.use(['form', 'layer', 'upload', 'laydate', "address"], function () {
             'city': data.field.city,
             'area': data.field.area,
             'userEmail': $(".userEmail").val(),
+            'headPath': $(".headPath").val(),
             'myself': $(".myself").val()
         };
         var hobby = "";
@@ -86,7 +115,7 @@ layui.use(['form', 'layer', 'upload', 'laydate', "address"], function () {
                 console.log(d);
                 if (d) {
                     window.sessionStorage.setItem("user", JSON.stringify(d));
-                    layer.msg("修改成功")
+                    $("#uploadImg").trigger("click");
 
                 } else {
                     layer.msg("修改失败")

@@ -11,7 +11,7 @@
         <result property="password" column="password"></result>
         <result property="right" column="right"></result>
         <result property="stauts" column="stauts"></result>
-        <result property="headPath" column="headpath"></result>
+        <result property="headPath" column="headPath"></result>
         <result property="classid" column="class"></result>
         <result property="userEmail" column="userEmail"></result>
         <result property="userEndTime" column="userEndTime"></result>
@@ -105,8 +105,8 @@
         select count(*) from user where name=#{name}
     </select>
 
-    <update id="updatehead" parameterType="user">
-            update user set headpath=#{headpath} where id=#{user_id}
+    <update id="updateHead" parameterType="user">
+            update user set headPath=#{headPath} where id=#{id}
 </update>
 
     <update id="updateuser" parameterType="user">

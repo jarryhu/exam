@@ -20,7 +20,7 @@ public interface UserDao {
 
     public User getUserByid(int id);
 
-    public int updatehead(User user);
+    public int updateHead(User user);
 
     public int checkUserName(String name);
 

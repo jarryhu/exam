@@ -17,17 +17,21 @@ layui.config({
     var menuText = $("#top_tabs", parent.document).text();  //判断打开的窗口是否存在“个人资料”页面
     var citys, areas;
     if (window.sessionStorage.getItem('user')) {
+        console.log("cacheUserInfo>>>>>" + window.sessionStorage.getItem('user'));
         //获取省信息
         address.provinces();
         var userInfo = JSON.parse(window.sessionStorage.getItem('user'));
         var citys;
         $("#uid").val(userInfo.id);
+        $(".userAvatar").attr("src", "/pic/" + userInfo.headPath);
+        $("input[name=loginName]").val(userInfo.loginName);
         $("input[name=nickname]").val(userInfo.nickname);
         $("input[name=rightName]").val(userInfo.right_.rightName);
         $(".realName").val(userInfo.loginName); //用户名
         $(".userSex input[value=" + userInfo.sex + "]").attr("checked", "checked"); //性别
         $(".userPhone").val(userInfo.userPhone); //手机号
         $(".userBirthday").val(userInfo.userBirthday); //出生年月
+        $(".headPath").val(userInfo.headPath); //头像
         //填充省份信息，同时调取市级信息列表
         $.get("../../json/address.json", function (addressData) {
             $(".userAddress select[name='province']").val(userInfo.province); //省
@@ -53,8 +57,8 @@ layui.config({
         userHobby = userHobby.split(",");
 
         for (key in userHobby) {
-            console.log(".userHobby input[name='" + userHobby[key]  + "']");
-            $(".userHobby input[name='" +userHobby[key] + "']").attr("checked", "checked");
+            console.log(".userHobby input[name='" + userHobby[key] + "']");
+            $(".userHobby input[name='" + userHobby[key] + "']").attr("checked", "checked");
 
         }
 

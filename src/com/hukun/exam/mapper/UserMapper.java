@@ -17,6 +17,7 @@ public interface UserMapper {
     public int modifyUser(QueryUserVo user);
 
     public User getUserByid(int id);
+    public int updateHead(User user);
 
 
 }

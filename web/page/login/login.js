@@ -21,7 +21,9 @@ layui.use(['form', 'layer', 'jquery'], function () {
             success: function (d) {
                 console.log(d);
                 if (d) {
+
                     window.sessionStorage.setItem("user", JSON.stringify(d));
+                    console.log("loginjs>>>>>>"+window.sessionStorage.getItem("user"));
                     // window.sessionStorage.setItem("right", d.right);
                     window.location.href = "../../index.html";
                 } else {

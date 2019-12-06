@@ -13,22 +13,34 @@
     <link rel="stylesheet" href="../../css/public.css" media="all"/>
 </head>
 <body class="childrenBody">
+<style>
+    .userAvatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+    }
+</style>
 <form class="layui-form layui-row">
     <div class="layui-col-md3 layui-col-xs12 user_right">
         <div class="layui-upload-list">
-            <img class="layui-upload-img layui-circle userFaceBtn userAvatar" id="userFace">
+            <img class="layui-upload-img layui-circle userFaceBtn userAvatar" src="/images/userface3.jpg" id="preview">
         </div>
-        <button type="button" class="layui-btn layui-btn-primary userFaceBtn"><i class="layui-icon">&#xe67c;</i>
+        <button type="button" id="test1" class="layui-btn layui-btn-primary userFaceBtn"><i
+                class="layui-icon">&#xe67c;</i>
             掐指一算，我要换一个头像了
         </button>
-        <p>由于是纯静态页面，所以只能显示一张随机的图片</p>
+        <button type="button" class="btn btn-primary" id="uploadImg"
+                style="display:none">
+            提交图片
+        </button>
+        <input type="hidden" name="headPath" class="headPath"value="">
     </div>
     <div class="layui-col-md6 layui-col-xs12">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <input type="hidden" class="layui-input id" id="uid"/>
             <div class="layui-input-block">
-                <input type="text" value="杜鑫" name="nickname" disabled class="layui-input layui-disabled">
+                <input type="text" value="杜鑫" name="loginName" disabled class="layui-input layui-disabled loginName">
             </div>
         </div>
         <div class="layui-form-item">
@@ -40,7 +52,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">真实姓名</label>
             <div class="layui-input-block">
-                <input type="text" value="" placeholder="请输入真实姓名" lay-verify="required" class="layui-input realName">
+                <input type="text" value="" name="nickname" placeholder="请输入真实姓名" lay-verify="required"
+                       class="layui-input nickname">
             </div>
         </div>
         <div class="layui-form-item" pane="">

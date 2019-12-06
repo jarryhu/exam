@@ -1,6 +1,8 @@
 package com.hukun.exam.controller;
 
 
+import com.hukun.exam.exception.HandleForException;
+import com.hukun.exam.pojo.QueryUserVo;
 import com.hukun.exam.pojo.User;
 import com.hukun.exam.service.UserDao;
 import net.sf.json.JSONArray;
@@ -39,4 +41,18 @@ public class UserController {
         map.put("data", userMap);
         return map;
     }
+
+
+    @RequestMapping("modifyUser.action")
+    @ResponseBody
+    public User modifyUser(@RequestBody QueryUserVo user) {
+        int update = userDao.modifyUser(user);
+        User userByid = null;
+        if (update > 0) {
+            userByid = userDao.getUserByid(user.getId());
+        }
+        return userByid;
+    }
+
+
 }

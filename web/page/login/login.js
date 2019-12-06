@@ -11,7 +11,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
 
     //登录按钮
     form.on("submit", function (data) {
-       // $(this).text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
+        // $(this).text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
 
         $.ajax({
             url: "/login.action",
@@ -21,10 +21,9 @@ layui.use(['form', 'layer', 'jquery'], function () {
             success: function (d) {
                 console.log(d);
                 if (d) {
-                    window.sessionStorage.setItem("user", d.nickname);
-                    window.sessionStorage.setItem("right", d.right);
+                    window.sessionStorage.setItem("user", JSON.stringify(d));
+                    // window.sessionStorage.setItem("right", d.right);
                     window.location.href = "../../index.html";
-
                 } else {
                     layer.msg("用户名密码错误")
                 }
@@ -68,9 +67,9 @@ layui.use(['form', 'layer', 'jquery'], function () {
                 layer.msg('请输入验证码！');
                 return false;
             } else if (val == '11111') {
-             //   alert('提交成功！');
-              //  $(".input-val").val('');
-              //  draw(show_num);
+                //   alert('提交成功！');
+                //  $(".input-val").val('');
+                //  draw(show_num);
                 return true;
             } else {
                 layer.msg('验证码错误！请重新输入！');

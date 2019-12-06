@@ -1,5 +1,6 @@
 package com.hukun.exam.service;
 
+import com.hukun.exam.pojo.QueryUserVo;
 import com.hukun.exam.pojo.User;
 
 import java.util.HashMap;
@@ -38,6 +39,11 @@ public interface UserDao {
 
 
     public List<User> userList(User user);
+
+
+    public int modifyUser(QueryUserVo user);
+
+
 
 
 

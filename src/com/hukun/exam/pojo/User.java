@@ -1,5 +1,7 @@
 package com.hukun.exam.pojo;
 
+import java.util.Date;
+
 public class User {
 
     private Integer id;
@@ -10,7 +12,98 @@ public class User {
     private Integer stauts;
     private String headPath;
     private Integer classid;
+    private Right right_;
+    private String userEmail;
+    private Date userEndTime;
+    private String userPhone;
+    private Date userBirthday;
+    private int province;
+    private int city;
+    private String myself;
+    private String sex;
+    private int area;
 
+    private String userHobby;
+
+    public String getUserHobby() {
+        return userHobby;
+    }
+
+    public void setUserHobby(String userHobby) {
+        this.userHobby = userHobby;
+    }
+
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public Date getUserEndTime() {
+        return userEndTime;
+    }
+
+    public void setUserEndTime(Date userEndTime) {
+        this.userEndTime = userEndTime;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public Date getUserBirthday() {
+        return userBirthday;
+    }
+
+    public void setUserBirthday(Date userBirthday) {
+        this.userBirthday = userBirthday;
+    }
+
+    public int getProvince() {
+        return province;
+    }
+
+    public void setProvince(int province) {
+        this.province = province;
+    }
+
+    public int getCity() {
+        return city;
+    }
+
+    public void setCity(int city) {
+        this.city = city;
+    }
+
+    public String getMyself() {
+        return myself;
+    }
+
+    public void setMyself(String myself) {
+        this.myself = myself;
+    }
 
     public Integer getId() {
         return id;
@@ -76,17 +169,11 @@ public class User {
         this.classid = classid;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", nickname='" + nickname + '\'' +
-                ", loginName='" + loginName + '\'' +
-                ", password='" + password + '\'' +
-                ", right=" + right +
-                ", stauts=" + stauts +
-                ", headPath='" + headPath + '\'' +
-                ", classid=" + classid +
-                '}';
+    public Right getRight_() {
+        return right_;
+    }
+
+    public void setRight_(Right right_) {
+        this.right_ = right_;
     }
 }

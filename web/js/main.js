@@ -32,11 +32,10 @@ layui.use(['form', 'element', 'layer', 'jquery'], function () {
         layer = parent.layer === undefined ? layui.layer : top.layer,
         element = layui.element;
     $ = layui.jquery;
-    var right = window.sessionStorage.getItem("right")
-    var url;
-    if (right == 1)
+    var user = JSON.parse(window.sessionStorage.getItem('user'));
+    if (user.right == 1)
         $("#userInfo").css("display", "none");
-    if (right == 2)
+    if (user.right == 2)
         $("#userInfo").css("display", "none");
 
 

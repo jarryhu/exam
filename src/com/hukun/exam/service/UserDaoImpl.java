@@ -2,6 +2,7 @@ package com.hukun.exam.service;
 
 import com.hukun.exam.mapper.UserMapper;
 
+import com.hukun.exam.pojo.QueryUserVo;
 import com.hukun.exam.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,10 +42,6 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    @Override
-    public User getUserByid(int id) {
-        return null;
-    }
 
     @Override
     public int updatehead(User user) {
@@ -91,6 +88,11 @@ public class UserDaoImpl implements UserDao {
         return userMapper.userList(user);
     }
 
+    @Override
+    public int modifyUser(QueryUserVo user) {
+        return userMapper.modifyUser(user);
+    }
+
 //    @Override
 //    public User Login(User user) {
 //        return userMapper.login(user);
@@ -102,10 +104,10 @@ public class UserDaoImpl implements UserDao {
 //    }
 //
 //
-//    @Override
-//    public User getUserByid(int id) {
-//        return userMapper.getUserByid(id);
-//    }
+    @Override
+    public User getUserByid(int id) {
+        return userMapper.getUserByid(id);
+    }
 //
 //    @Override
 //    public int updatehead(User user) {

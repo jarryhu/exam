@@ -5,14 +5,48 @@
 <mapper namespace="com.hukun.exam.mapper.UserMapper">
 
     <resultMap id="usermap" type="user">
-        <id property="user_id" column="id"></id>
-        <result property="user_name" column="name"></result>
-        <result property="user_age" column="age"></result>
-        <result property="user_major" column="major"></result>
-        <result property="user_password" column="password"></result>
-        <result property="address" column="address"></result>
-        <result property="headpath" column="headpath"></result>
+        <id property="id" column="id"></id>
+        <result property="nickname" column="nickname"></result>
+        <result property="loginName" column="loginName"></result>
+        <result property="password" column="password"></result>
+        <result property="right" column="right"></result>
+        <result property="stauts" column="stauts"></result>
+        <result property="headPath" column="headpath"></result>
+        <result property="classid" column="class"></result>
+        <result property="userEmail" column="userEmail"></result>
+        <result property="userEndTime" column="userEndTime"></result>
+        <result property="userPhone" column="userPhone"></result>
+        <result property="userBirthday" column="userBirthday"></result>
+        <result property="province" column="province"></result>
+        <result property="city" column="city"></result>
+        <result property="myself" column="myself"></result>
+        <result property="sex" column="sex"></result>
+        <result property="area" column="area"></result>
+        <result property="userHobby" column="userHobby"></result>
+        <association property="right_" javaType="Right">
+            <id property="rid" column="id"></id>
+            <result property="rightName" column="rightName"></result>
+        </association>
     </resultMap>
+
+
+    <update id="modifyUser" parameterType="QueryUserVo">
+      update user set
+        nickname=#{nickname},
+        userEmail=#{userEmail},
+        userPhone=#{userPhone},
+        userBirthday=#{userBirthday},
+        province=#{province},
+        city=#{city},
+        area=#{area},
+        myself=#{myself},
+        sex=#{sex},
+        headPath=#{headPath},
+        userHobby=#{userHobby}
+        where id=#{id}
+
+
+    </update>
 
     <insert id="userAdd" useGeneratedKeys="true" keyProperty="user_id" parameterType="user">
         insert into user value(null,#{user_name},#{user_age},#{user_major},
@@ -43,8 +77,8 @@
         </where>
     </select>
 
-    <select id="login" parameterType="user" resultType="user">
-        select * from user where loginName=#{loginName} and password=#{password}
+    <select id="login" parameterType="user" resultMap="usermap">
+       select u.*,r.id ,r.rightName  from user as u inner join `right` as r on u.`right`=r.id   where loginName=#{loginName} and password=#{password}
     </select>
     <select id="getUserList" parameterType="hashmap" resultMap="usermap">
         select * from user
@@ -64,7 +98,7 @@
     </select>
     <select id="getUserByid" parameterType="java.lang.Integer" resultMap="usermap">
         <include refid="s"/>
-        where id=#{user_id}
+        where id=#{id}
     </select>
 
     <select id="checkUserName" parameterType="string" resultType="integer">
@@ -127,4 +161,6 @@
             </if>
         </where>
     </select>
+
+
 </mapper>

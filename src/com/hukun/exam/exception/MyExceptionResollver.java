@@ -15,7 +15,7 @@ public class MyExceptionResollver implements HandlerExceptionResolver {
         } else {
             mad.addObject("msg", "未知异常  " + e.toString());
         }
-        mad.setViewName("error");
+        mad.setViewName("page/404");
         return mad;
     }
 }

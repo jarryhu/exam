@@ -65,7 +65,7 @@
 
 
     <select id="search" parameterType="user" resultMap="usermap">
-        <include refid="s"/>
+        <include refid="userinfo"/>
         <where>
             <if test="user_name!=null and user_name!=''">
                 and name like '%${user_name}%'
@@ -97,8 +97,7 @@
         limit #{pagestart}, #{pagesize}
     </select>
     <select id="getUserByid" parameterType="java.lang.Integer" resultMap="usermap">
-        <include refid="s"/>
-        where id=#{id}
+        <include refid="userinfo"/>  where u.id=#{id}
     </select>
 
     <select id="checkUserName" parameterType="string" resultType="integer">
@@ -115,7 +114,7 @@
 
 
     <select id="searchByWhere" parameterType="user" resultMap="usermap">
-        <include refid="s"/>
+        <include refid="userinfo"/>
         <where>
             <if test="user_name!=null and user_name!=''">
                 and name like "%${user_name}%"
@@ -131,8 +130,8 @@
         select  * from user
     </select>
 
-    <sql id="s">
-            select * from user
+    <sql id="userinfo">
+             select u.*,r.id ,r.rightName  from user as u inner join `right` as r on u.`right`=r.id
     </sql>
 
 

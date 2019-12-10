@@ -1,5 +1,6 @@
 package com.hukun.exam.service;
 
+import com.hukun.exam.pojo.Classes;
 import com.hukun.exam.pojo.QueryUserVo;
 import com.hukun.exam.pojo.User;
 
@@ -24,27 +25,22 @@ public interface UserDao {
 
     public int checkUserName(String name);
 
-    public List<User> searchByWhere(User user);
+    public int userCount(User user);
 
 
-    public List<User> search(User user);
-
-    public Integer userCount(User user);
-
-    public List<User> selectLayUitable();
+    public List<User> getUserList(User user);
 
     public List<User> selectpage(HashMap map);
 
     public int updateuser(User user);
 
 
-    public List<User> userList(User user);
+    public int loginDateTime(HashMap map);
 
+    public  List<Classes> selectClassByid();
 
-    public int modifyUser(QueryUserVo user);
-
-
-
+    public int modifyUserSelf(QueryUserVo user);
+    public int modifyUser(User user);
 
 
 }

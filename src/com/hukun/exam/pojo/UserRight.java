@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User {
+public class UserRight {
 
     private Integer id;
     private String nickname;
@@ -15,7 +15,7 @@ public class User {
     private Integer stauts;
     private String headPath;
     private Integer classid;
-
+    private Right right_;
     private String userEmail;
     private Date userEndTime;
     private String userPhone;
@@ -27,6 +27,8 @@ public class User {
     private int area;
 
     private String userHobby;
+
+
 
 
     public String getUserHobby() {
@@ -173,4 +175,11 @@ public class User {
         this.classid = classid;
     }
 
+    public Right getRight_() {
+        return right_;
+    }
+
+    public void setRight_(Right right_) {
+        this.right_ = right_;
+    }
 }

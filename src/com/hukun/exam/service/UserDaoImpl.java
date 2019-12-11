@@ -2,9 +2,7 @@ package com.hukun.exam.service;
 
 import com.hukun.exam.mapper.UserMapper;
 
-import com.hukun.exam.pojo.Classes;
-import com.hukun.exam.pojo.QueryUserVo;
-import com.hukun.exam.pojo.User;
+import com.hukun.exam.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     UserMapper userMapper;
 
     @Override
-    public User Login(User user) {
+    public UserRight Login(User user) {
         return userMapper.login(user);
     }
 
@@ -102,5 +100,7 @@ public class UserDaoImpl implements UserDao {
     public int modifyUser(User user) {
         return userMapper.modifyUser(user);
     }
+
+
 
 }

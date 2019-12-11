@@ -3,7 +3,7 @@
     {
       "title": "试题管理",
       "icon": "icon-text",
-      "href": "page/news/newsList.html",
+      "href": "page/exam/examList.html",
       "spread": false
     }
   ]

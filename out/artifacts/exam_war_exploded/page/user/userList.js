@@ -35,13 +35,13 @@ layui.use(['form', 'layer', 'table', 'util', 'jquery'], function () {
             },
             {
                 field: 'right', title: '用户权限', align: 'center', templet: function (d) {
-                    if (d.right == "1") {
-                        return "教师";
-                    } else if (d.right == "2") {
-                        return "学生";
-                    } else if (d.right == "3") {
-                        return "管理员";
-                    }
+                        if (d.right == "1") {
+                            return "教师";
+                        } else if (d.right == "2") {
+                            return "学生";
+                        } else if (d.right == "3") {
+                            return "管理员";
+                        }
                 }
             },
             {

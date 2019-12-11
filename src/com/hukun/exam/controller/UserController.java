@@ -1,9 +1,8 @@
 package com.hukun.exam.controller;
 
 
-import com.hukun.exam.pojo.Classes;
-import com.hukun.exam.pojo.QueryUserVo;
-import com.hukun.exam.pojo.User;
+import com.hukun.exam.pojo.*;
+import com.hukun.exam.service.ExamDao;
 import com.hukun.exam.service.UserDao;
 import com.hukun.exam.util.JsonDateValueProcessor;
 import net.sf.json.JSONArray;
@@ -26,10 +25,11 @@ public class UserController {
     @Autowired
     UserDao userDao;
 
+
     @RequestMapping("login.action")
     @ResponseBody
-    public User loginAction(@RequestBody User user) {
-        User loginUser = userDao.Login(user);
+    public UserRight loginAction(@RequestBody User user) {
+        UserRight loginUser = userDao.Login(user);
         if (null != loginUser) {
             HashMap<String, Object> map = new HashMap<>();
             map.put("id", loginUser.getId());
@@ -59,8 +59,6 @@ public class UserController {
         map.put("code", 0);
         map.put("msg", "");
         map.put("count", userDao.userCount(user));
-
-
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
         JSONArray userMap = JSONArray.fromObject(users, jsonConfig);
@@ -71,7 +69,7 @@ public class UserController {
 
     @RequestMapping("modifyUserSelf.action")
     @ResponseBody
-    public User modifyUser(@RequestBody QueryUserVo user) {
+    public User modifyUserSelf(@RequestBody QueryUserVo user) {
         int update = userDao.modifyUserSelf(user);
         User userByid = null;
         if (update > 0) {
@@ -95,10 +93,7 @@ public class UserController {
         file.transferTo(new File(path + filename));
         int update = userDao.updateHead(user);
         User userByid = userDao.getUserByid(id);
-
         return userByid;
-
-
     }
 
 
@@ -118,5 +113,22 @@ public class UserController {
     @ResponseBody
     public int modifyUser(User user) {
         return userDao.modifyUser(user);
+    }
+
+    @RequestMapping("uploadExam.action")
+    @ResponseBody
+    public User uploadExam(MultipartFile file, int id) throws IOException {
+        String filename = UUID.randomUUID().toString().replaceAll("-", "");
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        filename = filename + "." + extension;
+        String path = "D:\\upload\\";
+        Map<String, Object> map = new HashMap<>();
+        User user = new User();
+        user.setId(id);
+        user.setHeadPath(filename);
+        file.transferTo(new File(path + filename));
+        int update = userDao.updateHead(user);
+        User userByid = userDao.getUserByid(id);
+        return userByid;
     }
 }

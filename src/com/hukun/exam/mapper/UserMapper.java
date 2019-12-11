@@ -1,9 +1,7 @@
 package com.hukun.exam.mapper;
 
 
-import com.hukun.exam.pojo.Classes;
-import com.hukun.exam.pojo.QueryUserVo;
-import com.hukun.exam.pojo.User;
+import com.hukun.exam.pojo.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 
 public interface UserMapper {
 
-    public User login(User user);
+    public UserRight login(User user);
 
     public List<User> getUserList(HashMap map);
 
@@ -28,6 +26,8 @@ public interface UserMapper {
     public List<Classes> selectClassByid();
 
     public int modifyUser(User user);
+
+
 
 
 }

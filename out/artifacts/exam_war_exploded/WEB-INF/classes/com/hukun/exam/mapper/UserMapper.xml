@@ -176,7 +176,6 @@
         <association property="user" javaType="user">
             <id property="id" column="uid"></id>
             <result property="nickname" column="nickname"></result>
-
         </association>
 
 
@@ -204,4 +203,9 @@
     <insert id="insertPaper" parameterType="paper">
          insert paper values (#{id},#{examid},#{title},#{options_},#{answer})
     </insert>
+
+
+    <select id="getClasses" resultType="Classes">
+        select * from class
+    </select>
 </mapper>

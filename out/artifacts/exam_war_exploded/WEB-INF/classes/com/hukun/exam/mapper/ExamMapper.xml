@@ -43,29 +43,76 @@
         <result property="teacherId" column="teacherId"></result>
         <result property="publishTime" column="publishTime"></result>
         <result property="examStauts" column="examStauts"></result>
-
         <association property="user" javaType="user">
             <id property="id" column="uid"></id>
             <result property="nickname" column="nickname"></result>
-
         </association>
-
     </resultMap>
 
-    <insert id="insertExam" parameterType="Exam">
+    <insert id="insertExam" useGeneratedKeys="true" keyProperty="id" parameterType="Exam">
          insert exam values (#{id},
          #{examName},
          #{examDecript},
          #{classid},
-
          #{categary},
-           #{publish},
+         #{publish},
          #{teacherId},
          #{publishTime},
-         #{examStauts})
+         #{examStauts},
+         #{examFilePath},
+        #{time},
+         #{score})
     </insert>
 
-    <insert id="insertPaper" parameterType="paper">
-         insert paper values (#{id},#{examid},#{title},#{options_},#{answer})
+    <!--    <insert id="insertPaper" useGeneratedKeys="true" keyProperty="id" parameterType="paper">-->
+    <!--         insert paper values (#{id},#{examid},#{title},#{options_},#{answer})-->
+    <!--    </insert>-->
+
+
+    <insert id="insertPaper">
+        INSERT INTO paper(id,examid,title,options_,answer)
+        VALUES
+        <foreach collection="list" item="emp" separator=",">
+            (#{emp.id},#{emp.examid},#{emp.title},#{emp.options_},#{emp.answer})
+        </foreach>
     </insert>
+
+
+    <update id="updateExamFile" parameterType="exam">
+        update exam set examFilePath=#{examFilePath} where id=#{id}
+    </update>
+
+
+    <select id="getStudentExam" resultMap="markMap" parameterType="hashmap">
+select e.examName, e.score,e.time,  m.mark, e.id as eid,e.examDecript,m.examid
+from exam as e
+    left join marklist as m on m.examid = e.id and m.userid=#{id}
+where e.classid=#{classid}
+            limit #{pageStart}, #{pageSize}
+    </select>
+
+    <resultMap id="markMap" type="ExamMark">
+        <id property="id" column="eid"></id>
+        <result property="examName" column="examName"></result>
+        <result property="examDecript" column="examDecript"></result>
+        <result property="classid" column="classid"></result>
+        <result property="categary" column="categary"></result>
+        <result property="publish" column="publish"></result>
+        <result property="teacherId" column="teacherId"></result>
+        <result property="publishTime" column="publishTime"></result>
+        <result property="examStauts" column="examStauts"></result>
+        <result property="score" column="score"></result>
+        <result property="time" column="time"></result>
+        <association property="marklist" javaType="Marklist">
+            <id property="id" column="id"></id>
+            <result property="examid" column="examid"></result>
+            <result property="mark" column="mark"></result>
+        </association>
+
+    </resultMap>
+
+
+    <select id="makePaper" parameterType="integer" resultType="paper">
+        select * from paper where examid=#{id}
+    </select>
 </mapper>

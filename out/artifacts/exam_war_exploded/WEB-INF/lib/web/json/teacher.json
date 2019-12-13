@@ -1,0 +1,10 @@
+{
+  "contentManagement": [
+    {
+      "title": "试题管理",
+      "icon": "icon-text",
+      "href": "page/exam/examList.html",
+      "spread": false
+    }
+  ]
+}

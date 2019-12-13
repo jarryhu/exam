@@ -1,0 +1,49 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 15,
+	"data": [
+		{
+			"id": "1",
+			"examName": "ssm企业级开发",
+			"teacherName": "杜鑫",
+			"examStauts": "0",
+			"publishTime": "2017-04-14 00:00:00"
+		},
+		{
+			"id": "2",
+			"examName": "ssm企业级开发",
+			"teacherName": "杜鑫",
+			"examStauts": "0",
+			"publishTime": "2017-04-14 00:00:00"
+		},
+		{
+			"id": "3",
+			"examName": "ssm企业级开发",
+			"teacherName": "杜鑫",
+			"examStauts": "0",
+			"publishTime": "2017-04-14 00:00:00"
+		},
+		{
+			"id": "4",
+			"examName": "ssm企业级开发",
+			"teacherName": "杜鑫",
+			"examStauts": "0",
+			"publishTime": "2017-04-14 00:00:00"
+		},
+		{
+			"id": "5",
+			"examName": "ssm企业级开发",
+			"teacherName": "杜鑫",
+			"examStauts": "0",
+			"publishTime": "2017-04-14 00:00:00"
+		},
+		{
+			"id": "6",
+			"examName": "ssm企业级开发",
+			"teacherName": "杜鑫",
+			"examStauts": "0",
+			"publishTime": "2017-04-14 00:00:00"
+		}
+	]
+}

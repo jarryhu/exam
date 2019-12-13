@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="exam:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/exam_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="exam" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="json-lib-2.1-jdk13" />
+          <element id="library" level="project" name="commons-collections4-4.1" />
+          <element id="library" level="project" name="fastjson-1.2.62" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="exam/web/Web" />
+    </root>
+  </artifact>
+</component>

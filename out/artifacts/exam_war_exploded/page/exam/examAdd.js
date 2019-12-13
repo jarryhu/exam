@@ -12,28 +12,56 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
 
     $("#teacherId").val(JSON.parse(window.sessionStorage.getItem("user")).id)
 
-    //拖拽上传
-    upload.render({
-        elem: '#test10'
-        , url: '/uploadExam.action'
+
+    //上传试卷
+    var uploadInst = upload.render({
+        elem: '#test10' //绑定元素
+        , url: '/uploadExam.action' //上传接口
         , exts: 'xls|xlsx' //只允许上传Excel文件
-        , done: function (res) {
-            console.log(res)
+        , auto: false
+        , bindAction: '#uploadfile',
+        before: function () {
+            this.data = {'id': examid};//整合上传的参数
+        }
+
+
+        //选择文件后的回调
+        , choose: function (obj) {
+            obj.preview(function (index, file, result) {
+                $("#test10").css('display', "none");
+                $('#preview').css('display', "block");
+                $('#preview').attr('src', "../../images/xls.jpg");
+            })
+        },
+
+        done: function (res) {
+            console.log("uploadExam>>>>>>" + res);
+            //如果上传失败
+            if (!res) {
+                return layer.msg('上传失败');
+
+            }
+            //上传成功
+            if (res) {
+                console.log(res.path);
+                $.ajax({
+                    url: "/insertPaper.action",
+                    data: {"path": res.path, "examid": examid},
+                    success: function (d) {
+                        if (d > 0) {
+                            layer.close(layer.index);
+                            parent.location.reload();
+                            return layer.msg('试卷已生成', {time: 700});
+                        } else {
+                            layer.close(layer.index);
+                            return layer.msg('试卷已生成失败', {time: 700});
+                        }
+                    }
+                })
+
+            }
         }
     });
-
-
-    //上传缩略图
-    /*upload.render({
-        elem: '.thumbBox',
-        url: '../../json/userface.json',
-        method : "get",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
-        done: function(res, index, upload){
-            var num = parseInt(4*Math.random());  //生成0-4的随机数，随机显示一个头像信息
-            $('.thumbImg').attr('src',res.data[num].src);
-            $('.thumbBox').css("background","#fff");
-        }
-    });*/
 
     //格式化时间
     function filterTime(val) {
@@ -69,15 +97,16 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
     form.verify({
         newsName: function (val) {
             if (val == '') {
-                return "文章标题不能为空";
+                return "考试标题不能为空";
             }
         },
         content: function (val) {
             if (val == '') {
-                return "文章内容不能为空";
+                return "考试内容不能为空";
             }
         }
     })
+    var examid;
     form.on("submit(addNews)", function (data) {
         //截取文章内容中的一部分文字放入文章摘要
         // var abstract = layedit.getText(editIndex).substring(0, 50);
@@ -88,32 +117,15 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
             url: "/publishExam.action",
             data: data.field,
             success: function (d) {
+                console.log("publishExam>>>>>>>" + d);
                 if (d) {
-                    console.log(d);
+                    examid = d;
+                    $("#uploadfile").trigger("click");
                 }
 
             }
         })
-        // 实际使用时的提交信息
-        // $.post("上传路径",{
-        //     newsName : $(".newsName").val(),  //文章标题
-        //     abstract : $(".abstract").val(),  //文章摘要
-        //     content : layedit.getContent(editIndex).split('<audio controls="controls" style="display: none;"></audio>')[0],  //文章内容
-        //     newsImg : $(".thumbImg").attr("src"),  //缩略图
-        //     classify : '1',    //文章分类
-        //     newsStatus : $('.newsStatus select').val(),    //发布状态
-        //     newsTime : submitTime,    //发布时间
-        //     newsTop : data.filed.newsTop == "on" ? "checked" : "",    //是否置顶
-        // },function(res){
-        //
-        // })
-        setTimeout(function () {
-            top.layer.close(index);
-            top.layer.msg("文章添加成功！");
-            layer.closeAll("iframe");
-            //刷新父页面
-            parent.location.reload();
-        }, 500);
+
         return false;
     })
 
@@ -130,5 +142,22 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
             url: "../../json/newsImg.json"
         }
     });
+
+
+    $.ajax({
+        url: '/getClasses.action',
+        type: "post",
+        success: function (d) {
+            var c = $("#classes")
+            var op="";
+            for (var i = 0; i < d.length; i++) {
+                console.log(d[i].id);
+                console.log(d[i].className);
+                op += "<option value='" + d[i].id + "'>" + d[i].className + "</option>"
+            }
+            c.append(op);
+             form.render();
+        }
+    })
 
 })

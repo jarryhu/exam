@@ -113,6 +113,14 @@ where e.classid=#{classid}
 
 
     <select id="makePaper" parameterType="integer" resultType="paper">
-        select * from paper where id=#{id}
+        select * from paper where examid=#{id}
     </select>
+
+    <select id="getAnswer" parameterType="integer" resultType="String">
+        select answer from paper where examid=#{id}
+    </select>
+
+    <insert id="scoreInsert" parameterType="markList">
+        insert into marklist value (#{id},#{examid},#{mark},#{userid})
+    </insert>
 </mapper>

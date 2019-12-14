@@ -1,5 +1,7 @@
 package com.hukun.exam.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -68,6 +70,7 @@ public class UserList {
         private String userSex;
         private String userStatus;
         private String userGrade;
+        @JSONField(format = "yyyy-MM-dd hh:mm:ss") //fastJson 格式化时间
         private String userEndTime;
         private String userDesc;
 

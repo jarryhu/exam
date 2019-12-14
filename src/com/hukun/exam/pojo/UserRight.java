@@ -1,5 +1,6 @@
 package com.hukun.exam.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ public class UserRight {
     private Integer classid;
     private Right right_;
     private String userEmail;
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss") //fastJson 格式化时间
     private Date userEndTime;
     private String userPhone;
     private Date userBirthday;

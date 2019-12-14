@@ -1,5 +1,7 @@
 package com.hukun.exam.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class ExamUser {
     Integer categary;
     Integer publish;
     Integer teacherId;
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss") //fastJson 格式化时间
     Date publishTime;
     Integer examStauts;
 

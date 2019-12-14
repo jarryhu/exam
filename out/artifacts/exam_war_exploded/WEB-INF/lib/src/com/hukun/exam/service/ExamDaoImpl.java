@@ -2,11 +2,8 @@ package com.hukun.exam.service;
 
 import com.hukun.exam.mapper.ExamMapper;
 import com.hukun.exam.mapper.UserMapper;
-import com.hukun.exam.pojo.Exam;
-import com.hukun.exam.pojo.ExamMark;
-import com.hukun.exam.pojo.ExamUser;
+import com.hukun.exam.pojo.*;
 
-import com.hukun.exam.pojo.Paper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +44,13 @@ public class ExamDaoImpl implements ExamDao {
 
     public List<Paper> makePaper(Integer examid) {
         return examMapper.makePaper(examid);
+    }
+
+    public List<String> getAnswer(Integer examid) {
+        return examMapper.getAnswer(examid);
+    }
+
+    public int scoreInsert(Marklist marklist) {
+        return examMapper.scoreInsert(marklist);
     }
 }

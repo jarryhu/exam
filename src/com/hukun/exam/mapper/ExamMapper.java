@@ -22,4 +22,8 @@ public interface ExamMapper {
     public List<ExamMark> getStudentExam(HashMap map);
 
     public List<Paper> makePaper(Integer examid);
+
+    public List<String> getAnswer(Integer examid);
+
+    public int scoreInsert(Marklist marklist);
 }

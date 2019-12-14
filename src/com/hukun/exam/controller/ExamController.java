@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hukun.exam.pojo.*;
 import com.hukun.exam.service.ExamDao;
 import com.hukun.exam.util.JsonDateValueProcessor;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Controller
@@ -46,6 +49,7 @@ public class ExamController {
         map.put("code", 0);
         map.put("msg", "");
         JSONArray array = (JSONArray) JSON.toJSON(examList);
+
         map.put("data", array);
 
         return map;
@@ -130,19 +134,54 @@ public class ExamController {
 
     @RequestMapping("makePaper.action")
     @ResponseBody
-    public List<Paper> makePaper(int examid) {
-        return examDao.makePaper(examid);
+    public List<PaperAsOption> makePaper(int examid) {
+        List<Paper> papers = examDao.makePaper(examid);
+        List<PaperAsOption> paperAsOptions = new ArrayList<>();
+        for (Paper p :
+                papers) {
+            String options = p.getOptions_();
+            String[] strings = options.split(";");
+            PaperAsOption.OptionsBean optionsBean = new PaperAsOption.OptionsBean();
+            PaperAsOption paperAsOption = new PaperAsOption();
+            paperAsOption.setId(p.getId());
+            paperAsOption.setTitle(p.getTitle());
+            paperAsOption.setExamid(p.getExamid());
+            optionsBean.setA(strings[0].substring(2));
+            optionsBean.setB(strings[1].substring(2));
+            optionsBean.setC(strings[2].substring(2));
+            optionsBean.setD(strings[3].substring(2));
+            paperAsOption.setOptions_(optionsBean);
+            paperAsOptions.add(paperAsOption);
+        }
+        return paperAsOptions;
     }
 
+    @Autowired
+    HttpServletRequest request;
 
     @RequestMapping("/advance.action")
     @ResponseBody
-    public int advance(String choices) {
-        String answer = choices.substring(0, choices.length() - 1);
+    public int advance(String choices, int examid, int userid) {
         //   for (int i = 0; i < choice.size(); i++) {
-        System.out.println(answer);
-        // }
-        return 1;
+        int total = 0;
+        List<String> getanswer = examDao.getAnswer(examid);
+        int avage = 100 / getanswer.size();//每道题的分数
+        String[] split = choices.split(",");
+        for (int i = 0; i < getanswer.size(); i++) {
+            String a = getanswer.get(i).toLowerCase();
+            if (a.equals(split[i])) {
+                total += avage;
+            }
+        }
+        //插入成绩
+        Marklist marklist = new Marklist();
+        marklist.setExamid(examid);
+        marklist.setMark(total);
+        marklist.setUserid(userid);
+        int result = examDao.scoreInsert(marklist);
+        System.out.println(total);
+
+        return result;
     }
 
 

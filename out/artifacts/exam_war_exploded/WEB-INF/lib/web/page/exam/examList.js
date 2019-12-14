@@ -40,7 +40,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             },
             {field: 'examStauts', title: '发布状态', align: 'center', templet: "#newsStatus", width: 170},
             {
-                field: 'publish', title: '发布时间', align: 'center', width: 170,
+                field: 'publishTime', title: '发布时间', align: 'center', width: 170,
             },
 
             {title: '操作', width: 50, templet: '#newsListBar'}

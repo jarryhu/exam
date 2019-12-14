@@ -11,7 +11,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
 
     //登录按钮
     form.on("submit", function (data) {
-        // $(this).text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
+         $(this).text("登录中...").attr("disabled", "disabled").addClass("layui-disabled");
 
         $.ajax({
             url: "/login.action",
@@ -21,9 +21,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
             success: function (d) {
                 console.log(d);
                 if (d) {
-
                     window.sessionStorage.setItem("user", JSON.stringify(d));
-
                     window.location.href = "../../index.html";
                 } else {
                     layer.msg("用户名密码错误")

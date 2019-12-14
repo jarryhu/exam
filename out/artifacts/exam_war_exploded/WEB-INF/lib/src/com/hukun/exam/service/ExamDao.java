@@ -1,10 +1,6 @@
 package com.hukun.exam.service;
 
-import com.hukun.exam.pojo.Exam;
-import com.hukun.exam.pojo.ExamMark;
-import com.hukun.exam.pojo.ExamUser;
-
-import com.hukun.exam.pojo.Paper;
+import com.hukun.exam.pojo.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,4 +18,7 @@ public interface ExamDao {
     public List<ExamMark> getStudentExam(HashMap map);
 
     public List<Paper> makePaper(Integer examid);
+    public List<String> getAnswer(Integer examid);
+
+    public int scoreInsert(Marklist marklist);
 }

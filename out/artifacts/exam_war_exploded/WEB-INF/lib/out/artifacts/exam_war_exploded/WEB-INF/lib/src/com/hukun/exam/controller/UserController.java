@@ -1,9 +1,11 @@
 package com.hukun.exam.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.hukun.exam.pojo.*;
 import com.hukun.exam.service.UserDao;
 import com.hukun.exam.util.JsonDateValueProcessor;
-import net.sf.json.JSONArray;
+
 import net.sf.json.JsonConfig;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +66,10 @@ public class UserController {
         map.put("code", 0);
         map.put("msg", "");
         map.put("count", userDao.userCount(user));
-        JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
-        JSONArray userMap = JSONArray.fromObject(users, jsonConfig);
+        com.alibaba.fastjson.JSONArray userMap = (JSONArray) JSON.toJSON(users);
+//        JsonConfig jsonConfig = new JsonConfig();
+//        jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
+//        JSONArray userMap = JSONArray.fromObject(users, jsonConfig);
         map.put("data", userMap);
         return map;
     }

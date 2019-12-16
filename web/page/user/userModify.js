@@ -3,6 +3,19 @@ layui.use(['form', 'layer'], function () {
     layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
 
+
+
+        form.on("select(userGrade)",function(data){
+          var val=data.value;
+        if(val==2)
+        {
+             $(".classes").show();
+        }else
+        {
+         $(".classes").hide();
+        }
+        })
+
     form.on("submit(addUser)", function (data) {
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});

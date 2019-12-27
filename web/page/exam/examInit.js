@@ -6,7 +6,7 @@ layui.use(['form','layer','jquery'],function(){
 
  	var systemParameter;
  	form.on("submit",function(data){
- 		window.location.href = "exam.html";
+ 		window.location.href = "exam2.html";
  		return false;
  	})
 

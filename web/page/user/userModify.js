@@ -5,8 +5,10 @@ layui.use(['form', 'layer'], function () {
 
 
 
+
+
         form.on("select(userGrade)",function(data){
-          var val=data.value;
+            var val=data.value;
         if(val==2)
         {
              $(".classes").show();

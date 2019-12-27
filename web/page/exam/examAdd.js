@@ -39,7 +39,6 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
             //如果上传失败
             if (!res) {
                 return layer.msg('上传失败');
-
             }
             //上传成功
             if (res) {
@@ -58,7 +57,6 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
                         }
                     }
                 })
-
             }
         }
     });

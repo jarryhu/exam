@@ -132,28 +132,28 @@ public class ExamController {
     }
 
 
-    @RequestMapping("makePaper.action")
+    @RequestMapping("/makePaper.action")
     @ResponseBody
-    public List<PaperAsOption> makePaper(int examid) {
+    public List<Paper> makePaper(int examid) {
         List<Paper> papers = examDao.makePaper(examid);
-        List<PaperAsOption> paperAsOptions = new ArrayList<>();
-        for (Paper p :
-                papers) {
-            String options = p.getOptions_();
-            String[] strings = options.split(";");
-            PaperAsOption.OptionsBean optionsBean = new PaperAsOption.OptionsBean();
-            PaperAsOption paperAsOption = new PaperAsOption();
-            paperAsOption.setId(p.getId());
-            paperAsOption.setTitle(p.getTitle());
-            paperAsOption.setExamid(p.getExamid());
-            optionsBean.setA(strings[0].substring(2));
-            optionsBean.setB(strings[1].substring(2));
-            optionsBean.setC(strings[2].substring(2));
-            optionsBean.setD(strings[3].substring(2));
-            paperAsOption.setOptions_(optionsBean);
-            paperAsOptions.add(paperAsOption);
-        }
-        return paperAsOptions;
+//        List<PaperAsOption> paperAsOptions = new ArrayList<>();
+//        for (Paper p :
+//                papers) {
+//            String options = p.getOptions_();
+//            String[] strings = options.split(";");
+//            PaperAsOption.OptionsBean optionsBean = new PaperAsOption.OptionsBean();
+//            PaperAsOption paperAsOption = new PaperAsOption();
+//            paperAsOption.setId(p.getId());
+//            paperAsOption.setTitle(p.getTitle());
+//            paperAsOption.setExamid(p.getExamid());
+//            optionsBean.setA(strings[0].substring(2));
+//            optionsBean.setB(strings[1].substring(2));
+//            optionsBean.setC(strings[2].substring(2));
+//            optionsBean.setD(strings[3].substring(2));
+//            paperAsOption.setOptions_(optionsBean);
+//            paperAsOptions.add(paperAsOption);
+        //       }
+        return papers;
     }
 
     @Autowired

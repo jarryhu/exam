@@ -15,22 +15,34 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
         data: {"examid": examid},
         success: function (d) {
             count = d.length;
-            for (var i in d) {
-                op += d[i].id + ",";
-
-                //第三步：渲染模版
-                var data = { //数据
-                    "title": "Layui常用模块"
-                    , "list": d
-                }
-                var getTpl = demo.innerHTML
-                    , view = document.getElementById('view');
-                laytpl(getTpl).render(data, function (html) {
-                    view.innerHTML = html;
-                });
+            console.log(d[0]);
+            //第三步：渲染模版
+            var data = { //数据
+                "title": "考试"
+                , "list": d[0]
             }
-            op = op.substring(0, op.length - 1);
-            op1 = op.split(",");
+            var getTpl = demo.innerHTML
+                , view = document.getElementById('view');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+
+            // for (var i in d) {
+            //     op += d[i].id + ",";
+            //
+            //     //第三步：渲染模版
+            //     var data = { //数据
+            //         "title": "考试"
+            //         , "list": d[i]
+            //     }
+            //     var getTpl = demo.innerHTML
+            //         , view = document.getElementById('view');
+            //     laytpl(getTpl).render(data, function (html) {
+            //         view.innerHTML = html;
+            //     });
+            // }
+            // op = op.substring(0, op.length - 1);
+            // op1 = op.split(",");
 
         }
 
@@ -60,8 +72,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
         return false;
     })
 
-    var nowPage = 0;
-    var sumPage = 2;
+
     var hour = 0;//时
     var minute = 0;// 分
     var second = 0;// 秒
@@ -81,7 +92,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
 
         $("#mytime").html(mytimeHtml + "<span>" + hour + "时" + minute + "分" + second + "秒</span>");
 
-        if (second == 10) {
+        if (minute == 10000) {
             $("#advance").trigger("click");
 
         }

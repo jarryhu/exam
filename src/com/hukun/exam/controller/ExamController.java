@@ -11,9 +11,11 @@ import com.hukun.exam.util.JsonDateValueProcessor;
 import com.hukun.exam.util.ToolUtil;
 
 import org.apache.commons.io.FilenameUtils;
+import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -161,15 +163,15 @@ public class ExamController {
 
     @RequestMapping("/advance.action")
     @ResponseBody
-    public int advance(String choices, int examid, int userid) {
+    public int advance(@RequestParam(value="choosex[]") String[] choosex, int examid, int userid) {
         //   for (int i = 0; i < choice.size(); i++) {
         int total = 0;
         List<String> getanswer = examDao.getAnswer(examid);
         int avage = 100 / getanswer.size();//每道题的分数
-        String[] split = choices.split(",");
+        //String[] split = choices.split(",");
         for (int i = 0; i < getanswer.size(); i++) {
             String a = getanswer.get(i).toLowerCase();
-            if (a.equals(split[i])) {
+            if (a.equals(choosex[i])) {
                 total += avage;
             }
         }

@@ -90,6 +90,8 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
                         body.find(".total").html(data.score);
                         body.find(".loginName").html(JSON.parse(window.sessionStorage.getItem("user")).loginName);
                         window.sessionStorage.setItem("examid", data.id);
+                        window.sessionStorage.setItem("examTime", data.time);
+                        window.sessionStorage.setItem("score", data.score);
                         form.render();
                     }
                 }

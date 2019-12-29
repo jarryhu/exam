@@ -38,7 +38,11 @@
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
-
+<!--    &lt;!&ndash;避免springmvc拦截以html结尾的请求&ndash;&gt;-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>default</servlet-name>-->
+<!--        <url-pattern>*.html</url-pattern>-->
+<!--    </servlet-mapping>-->
     <!-- 解决post乱码问题 -->
     <filter>
         <filter-name>encoding</filter-name>

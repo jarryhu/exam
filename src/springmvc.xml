@@ -14,7 +14,7 @@
     <context:component-scan base-package="com.hukun.exam.controller"></context:component-scan>
 
     <!--    //注解驱动的方式 把最新的處理器映射器和處理器適配器放到spring容器中-->
-
+    <mvc:default-servlet-handler/>
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -41,10 +41,8 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/*.action"/>
-
+            <mvc:exclude-mapping path="/login*.action"/>
             <mvc:exclude-mapping path="/check*.action"/>
-            <mvc:exclude-mapping path="/searchByWhere.action"/>
             <bean class="com.hukun.exam.interceptor.LoginInterceptor"></bean>
         </mvc:interceptor>
 

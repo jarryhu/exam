@@ -35,7 +35,7 @@ public class UserController {
         UserRight loginUser = userDao.Login(user);
         if (null != loginUser) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", loginUser);
+            session.setAttribute("userLogin", loginUser);
             HashMap<String, Object> map = new HashMap<>();
             map.put("id", loginUser.getId());
             map.put("userEndTime", new Date());

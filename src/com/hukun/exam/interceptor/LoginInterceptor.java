@@ -1,6 +1,7 @@
 package com.hukun.exam.interceptor;
 
 import com.hukun.exam.pojo.User;
+import com.hukun.exam.pojo.UserRight;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,11 +15,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         System.out.println("LoginInterceptor>>>>>preHandle");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserRight user = (UserRight) session.getAttribute("userLogin");
         if (user != null) {
             return true;
         }
-        response.sendRedirect("loginPage.action");
+        response.sendRedirect("/loginPage.action");
         return false;
     }
 

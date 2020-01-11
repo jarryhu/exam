@@ -42,36 +42,36 @@ public class ToolUtil {
 
     public static final String OFFICE_EXCEL_XLS = "xls";
     public static final String OFFICE_EXCEL_XLSX = "xlsx";
-
-    /**
-     * 读取指定Sheet也的内容
-     *
-     * @param filepath filepath 文件全路径
-     * @param sheetNo  sheet序号,从0开始,如果读取全文sheetNo设置null
-     */
-    public static String readExcel(String filepath, Integer sheetNo)
-            throws EncryptedDocumentException, InvalidFormatException, IOException {
-        StringBuilder sb = new StringBuilder();
-        Workbook workbook = getWorkbook(filepath);
-        if (workbook != null) {
-            if (sheetNo == null) {
-                int numberOfSheets = workbook.getNumberOfSheets();
-                for (int i = 0; i < numberOfSheets; i++) {
-                    Sheet sheet = workbook.getSheetAt(i);
-                    if (sheet == null) {
-                        continue;
-                    }
-                    sb.append(readExcelSheet(sheet));
-                }
-            } else {
-                Sheet sheet = workbook.getSheetAt(sheetNo);
-                if (sheet != null) {
-                    sb.append(readExcelSheet(sheet));
-                }
-            }
-        }
-        return sb.toString();
-    }
+//
+//    /**
+//     * 读取指定Sheet也的内容
+//     *
+//     * @param filepath filepath 文件全路径
+//     * @param sheetNo  sheet序号,从0开始,如果读取全文sheetNo设置null
+//     */
+//    public static String readExcel(String filepath, Integer sheetNo)
+//            throws EncryptedDocumentException, InvalidFormatException, IOException {
+//        StringBuilder sb = new StringBuilder();
+//        Workbook workbook = getWorkbook(filepath);
+//        if (workbook != null) {
+//            if (sheetNo == null) {
+//                int numberOfSheets = workbook.getNumberOfSheets();
+//                for (int i = 0; i < numberOfSheets; i++) {
+//                    Sheet sheet = workbook.getSheetAt(i);
+//                    if (sheet == null) {
+//                        continue;
+//                    }
+//                    sb.append(readExcelSheet(sheet));
+//                }
+//            } else {
+//                Sheet sheet = workbook.getSheetAt(sheetNo);
+//                if (sheet != null) {
+//                    sb.append(readExcelSheet(sheet));
+//                }
+//            }
+//        }
+//        return sb.toString();
+//    }
 
     /**
      * 根据文件路径获取Workbook对象

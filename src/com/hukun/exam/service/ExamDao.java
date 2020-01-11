@@ -21,4 +21,5 @@ public interface ExamDao {
     public List<String> getAnswer(Integer examid);
 
     public int scoreInsert(Marklist marklist);
+    public int deleteExam(Integer id);
 }

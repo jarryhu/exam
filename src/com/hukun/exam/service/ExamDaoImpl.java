@@ -53,4 +53,9 @@ public class ExamDaoImpl implements ExamDao {
     public int scoreInsert(Marklist marklist) {
         return examMapper.scoreInsert(marklist);
     }
+
+    @Override
+    public int deleteExam(Integer id) {
+       return  examMapper.deleteExam(id);
+    }
 }

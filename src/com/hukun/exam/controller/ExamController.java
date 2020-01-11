@@ -70,6 +70,13 @@ public class ExamController {
         return examDao.insertExam(exam);
     }
 
+
+    @RequestMapping("deleteExam.action")
+    @ResponseBody
+    public int deleteExam(Integer id) {
+        return examDao.deleteExam(id);
+    }
+
     /**
      * 考试附件的上传
      *
@@ -101,15 +108,18 @@ public class ExamController {
     @RequestMapping("insertPaper.action")
     @ResponseBody
     public int insertPaper(String path, int examid) {
+        int result = 0;
         try {
 
             List<Paper> list = ToolUtil.readExcel(path, examid);
-            int result = examDao.insertPaper(list);
+            result = examDao.insertPaper(list);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            return result;
         }
-        return 0;
+
     }
 
     @RequestMapping("getStudentExam.action")
@@ -163,7 +173,7 @@ public class ExamController {
 
     @RequestMapping("/advance.action")
     @ResponseBody
-    public int advance(@RequestParam(value="choosex[]") String[] choosex, int examid, int userid) {
+    public int advance(@RequestParam(value = "choosex[]") String[] choosex, int examid, int userid) {
         //   for (int i = 0; i < choice.size(); i++) {
         int total = 0;
         List<String> getanswer = examDao.getAnswer(examid);

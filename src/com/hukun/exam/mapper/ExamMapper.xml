@@ -82,6 +82,10 @@
         update exam set examFilePath=#{examFilePath} where id=#{id}
     </update>
 
+    <delete id="deleteExam" parameterType="integer">
+        delete FROM exam where id=#{id}
+    </delete>
+
 
     <select id="getStudentExam" resultMap="markMap" parameterType="hashmap">
 select e.examName, e.score,e.time,  m.mark, e.id as eid,e.examDecript,m.examid

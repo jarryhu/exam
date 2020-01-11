@@ -2,11 +2,14 @@ package com.hukun.exam.pojo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ExamUser {
+public class ExamUser  implements Serializable {
 
+
+    private static final long serialVersionUID = 1574708031958266077L;
     Integer id;
     String examName;
     String examDecript;

@@ -52,9 +52,23 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
                             parent.location.reload();
                             return layer.msg('试卷已生成', {time: 700});
                         } else {
-                            layer.close(layer.index);
-                            return layer.msg('试卷已生成失败', {time: 700});
+                            $.ajax({
+                                url: "/deleteExam.action",
+                                data: {"id": examid},
+                                success: function (d) {
+                                    if (d > 0) {
+                                        layer.close(layer.index);
+                                        return layer.msg('试卷已生成失败', {time: 700});
+                                    }
+
+                                }
+                            })
+
                         }
+                    },
+                    error: function (d) {
+
+
                     }
                 })
             }
@@ -147,14 +161,14 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload', 'jquery'], function 
         type: "post",
         success: function (d) {
             var c = $("#classes")
-            var op="";
+            var op = "";
             for (var i = 0; i < d.length; i++) {
                 console.log(d[i].id);
                 console.log(d[i].className);
                 op += "<option value='" + d[i].id + "'>" + d[i].className + "</option>"
             }
             c.append(op);
-             form.render();
+            form.render();
         }
     })
 
